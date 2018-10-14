@@ -9,7 +9,7 @@ class DataExtractor(object):
         self._pro_matches_url = 'https://api.opendota.com/api/proMatches'
         self._match_url = 'https://api.opendota.com/api/matches/{match_id}'
 
-    def get_pro_matches(self, match_id=None):
+    def extract_pro_matches_from_api(self, match_id=None):
 
         pro_matches_url = self._pro_matches_url
 
@@ -33,7 +33,7 @@ class DataExtractor(object):
         resp = json.loads(resp.text)
         return resp
 
-    def get_match_data(self, match_id):
+    def extract_match_data_from_api(self, match_id):
         match_url = self._match_url.format(match_id=match_id)
         print('Querying match', match_id, 'data')
 
@@ -49,3 +49,9 @@ class DataExtractor(object):
 
         resp = json.loads(resp.text)
         return resp
+
+    def extract_pro_matches_from_local(self):
+        pass
+
+    def extract_match_data_from_local(self):
+        pass
