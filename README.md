@@ -2,7 +2,7 @@
 
 ## Data Collection
 
-Firstly, we collect *33,181$* public matches data using [OpenDota Explorer](https://www.opendota.com/explorer)
+Firstly, we collect *38,357* public matches data using [OpenDota Explorer](https://www.opendota.com/explorer)
 
 Below is the query we used:
 
@@ -13,7 +13,7 @@ where avg_mmr > 5000 and
     lobby_type = 7 and 
     game_mode = 22 and 
     start_time > 1535760000 and
-    start_time < 1538813078
+    start_time < 1539280800
 ```
 
 Then, we save the result as `public_matches.json` by clicking the *API*.

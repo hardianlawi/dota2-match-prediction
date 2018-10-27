@@ -16,6 +16,18 @@ class MongoDB(object):
         return self._exist('matches_data')
 
     def query_all_data(self, collection_name):
+        """Create generator to iterate over the data from a collection
+
+        Args:
+            collection_name (str): the name of the collection to be queried
+
+        Raises:
+            CollectionNotFoundError: If the collection specified does not exist
+
+        Returns:
+            generator
+        """
+
         if not self._exist(collection_name):
             raise CollectionNotFoundError('Collection does not exist.')
         print('Querying data from %s.' % collection_name)

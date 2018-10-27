@@ -51,7 +51,7 @@ class DataExtractor(object):
         return resp
 
     def extract_pro_matches_from_local(self):
-        pass
+        raise NotImplementedError
 
     def extract_match_data_from_local(self):
-        pass
+        raise NotImplementedError

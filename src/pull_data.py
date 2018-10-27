@@ -1,5 +1,5 @@
 import json
-import argparse
+import click
 import logging
 from src.database import MongoDB
 from src.data_extractor import DataExtractor
@@ -18,7 +18,23 @@ def filter_pro_matches(resp):
     return [x for x in resp if x['dire_name'] and x['radiant_name']]
 
 
+@click.command()
+@click.option('--api', default='pro_matches')
+@click.option('--less_than_match_id', default=4148592604,
+              help='If query from pro matches API, will query all matches with match \
+                    id that is less than `less_than_match_id`.\
+                    If query from matches data API, if --pub_matches_records is not specified\
+                    , will query the matches information about the pro matches with match id\
+                    less than `less_than_match_id`')
+@click.option('--pub_matches_records', help="file containing the public matches records")
 def main(api, less_than_match_id, pub_matches_records):
+
+    assert api is not None
+    assert less_than_match_id is not None
+
+    if pub_matches_records is not None:
+        assert api == 'matches_data', 'Set API to matches data to query \
+        pub matches records'
 
     # Initialize API caller and Database
     data_extractor = DataExtractor()
@@ -42,6 +58,9 @@ def main(api, less_than_match_id, pub_matches_records):
 
     elif api == 'matches_data':
 
+        # Query matches information #
+        #############################
+
         if pub_matches_records is not None:
             with open(pub_matches_records, 'r') as f:
                 pub_matches = json.load(f)
@@ -62,26 +81,5 @@ def main(api, less_than_match_id, pub_matches_records):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--api', default='pro_matches',
-                        description="API to extract the data")
-    parser.add_argument('--less_than_match_id', default=4148592604)
-    parser.add_argument('--pub_matches_records',
-                        description="file containing the public matches records")
-
-    # Parse arguments
-    args = parser.parse_args()
-
-    # Assign arguments to variables
-    api = args.api
-    less_than_match_id = args.less_than_match_id
-    pub_matches_records = args.pub_matches_records
-
-    assert api is not None
-    assert less_than_match_id is not None
-
-    if pub_matches_records is not None:
-        assert api == 'matches_data', 'Set API to matches data'
-
-    # Run main function
-    main(api, less_than_match_id, pub_matches_records)
+    # pylint: disable=no-value-for-parameter
+    main()

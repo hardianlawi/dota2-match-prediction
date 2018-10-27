@@ -1,8 +1,7 @@
 import os
 import csv
-import argparse
+import click
 from tqdm import tqdm
-
 from src.database import MongoDB
 
 
@@ -29,14 +28,23 @@ def parse_one_match(doc):
 
 def to_csv(docs_generator, collection_name, outputs_dir):
     create_dir_if_not_exist(outputs_dir)
-    with open('{}/{}.csv'.format(outputs_dir, collection_name), 'w') as f:
+    filename = '{}/{}.csv'.format(outputs_dir, collection_name)
+    with open(filename, 'w') as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         writer.writeheader()
+        row_counts = 0
         for doc in tqdm(docs_generator):
             row = parse_one_match(doc)
+            if not row:
+                raise Exception
             writer.writerow(row)
+            row_counts += 1
+    print('Written %d rows to %s' % (row_counts, filename))
 
 
+@click.command()
+@click.argument('collection_name', help='Collection to query from')
+@click.option('--outputs_dir', default='data')
 def main(collection_name, outputs_dir):
     db = MongoDB()
     docs_generator = db.query_all_data(collection_name)
@@ -45,12 +53,5 @@ def main(collection_name, outputs_dir):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('collection_name', help='Collection to query from')
-    parser.add_argument('--outputs_dir', default='outputs')
-
-    args = parser.parse_args()
-    collection_name = args.collection_name
-    outputs_dir = args.outputs_dir
-
-    main(collection_name, outputs_dir)
+    # pylint: disable=no-value-for-parameter
+    main()
