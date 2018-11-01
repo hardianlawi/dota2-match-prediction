@@ -40,3 +40,13 @@ After querying the public matches, we extract the more detailed matches data usi
 Another API alternative is to use [this](https://wiki.teamfortress.com/wiki/WebAPI#Dota_2) which requires *Steam API key*.
 
 After extracting the data, we reformat and save it to a `csv` format.
+
+## References
+
+- http://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf
+- http://cs229.stanford.edu/proj2015/249_report.pdf
+- http://cs229.stanford.edu/proj2017/final-reports/5233394.pdf
+- http://cs230.stanford.edu/projects_spring_2018/reports/8290559.pdf
+- https://dspace.cvut.cz/bitstream/handle/10467/76831/F8-BP-2018-Beskyd-Filip-thesis.pdf?sequence=-1
+- http://jmcauley.ucsd.edu/cse255/projects/fa15/018.pdf
+- http://ceur-ws.org/Vol-1842/paper_05.pdf
