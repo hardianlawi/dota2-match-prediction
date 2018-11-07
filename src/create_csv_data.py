@@ -20,8 +20,13 @@ def create_dir_if_not_exist(outputs_dir):
 def parse_one_match(doc):
     row = {}
     row['match_id'] = doc['match_id']
-    row.update({'hero_' + str(i): player['hero_id'] for
-                i, player in enumerate(doc['players'])})
+
+    players = doc['players']
+    for i, player in enumerate(players):
+        # If there is anyone abandon, don't record match
+        if player['abandons']:
+            return None
+        row['hero_' + str(i)] = player['hero_id']
     row.update({'radiant_win': doc['radiant_win']})
     return row
 
@@ -35,15 +40,15 @@ def to_csv(docs_generator, collection_name, outputs_dir):
         row_counts = 0
         for doc in tqdm(docs_generator):
             row = parse_one_match(doc)
-            if not row:
-                raise Exception
+            if row is None:
+                continue
             writer.writerow(row)
             row_counts += 1
     print('Written %d rows to %s' % (row_counts, filename))
 
 
 @click.command()
-@click.argument('collection_name', help='Collection to query from')
+@click.option('--collection_name', help='Collection to query from')
 @click.option('--outputs_dir', default='data')
 def main(collection_name, outputs_dir):
     db = MongoDB()
