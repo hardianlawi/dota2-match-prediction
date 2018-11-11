@@ -1,4 +1,4 @@
-# Dota 2 Hero Recommendation System
+# Dota 2 Match Winning team Prediction
 
 ## Data Collection
 
