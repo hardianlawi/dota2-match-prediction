@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from src.utils.features import feature_names
 
 
-def define_model(name='custom_nn_1', optimizer='adam', seed=0,
+def define_model(name, optimizer='adam', seed=0,
                  learning_rate=0.001, unit_size=16, activation='relu',
                  dropout_rate=0.2, alpha=0.01):
 

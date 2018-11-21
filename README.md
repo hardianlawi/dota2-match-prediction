@@ -1,4 +1,4 @@
-# Dota 2 Match Winning team Prediction
+# Dota 2 Match Outcome Prediction
 
 ## Data Collection
 
@@ -41,12 +41,11 @@ Another API alternative is to use [this](https://wiki.teamfortress.com/wiki/WebA
 
 After extracting the data, we reformat and save it to a `csv` format.
 
-## References
+## Related Work
+
+Below are some related works of Machine Learning application on Dota 2:
 
 - http://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf
-- http://cs229.stanford.edu/proj2015/249_report.pdf
 - http://cs229.stanford.edu/proj2017/final-reports/5233394.pdf
 - http://cs230.stanford.edu/projects_spring_2018/reports/8290559.pdf
-- https://dspace.cvut.cz/bitstream/handle/10467/76831/F8-BP-2018-Beskyd-Filip-thesis.pdf?sequence=-1
 - http://jmcauley.ucsd.edu/cse255/projects/fa15/018.pdf
-- http://ceur-ws.org/Vol-1842/paper_05.pdf
