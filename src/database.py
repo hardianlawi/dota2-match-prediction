@@ -2,18 +2,17 @@ import pymongo
 
 
 class MongoDB(object):
-
     def __init__(self):
-        self._client = pymongo.MongoClient('mongodb://localhost:27017/')
-        self._db = self._client['mydatabase']
-        self.pro_matches = self._db['pro_matches']
-        self.matches_data = self._db['matches_data']
+        self._client = pymongo.MongoClient("mongodb://localhost:27017/")
+        self._db = self._client["mydatabase"]
+        self.pro_matches = self._db["pro_matches"]
+        self.matches_data = self._db["matches_data"]
 
     def pro_matches_col_exist(self):
-        return self._exist('pro_matches')
+        return self._exist("pro_matches")
 
     def matches_data_col_exist(self):
-        return self._exist('matches_data')
+        return self._exist("matches_data")
 
     def query_all_data(self, collection_name):
         """Create generator to iterate over the data from a collection
@@ -29,8 +28,8 @@ class MongoDB(object):
         """
 
         if not self._exist(collection_name):
-            raise CollectionNotFoundError('Collection does not exist.')
-        print('Querying data from %s.' % collection_name)
+            raise CollectionNotFoundError("Collection does not exist.")
+        print("Querying data from %s." % collection_name)
         return self._query_from_collection(collection_name)
 
     def _exist(self, collection_name):
@@ -43,6 +42,5 @@ class MongoDB(object):
 
 
 class CollectionNotFoundError(Exception):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
