@@ -7,11 +7,11 @@ Firstly, we collect *38,357* public matches data using [OpenDota Explorer](https
 Below is the query we used:
 
 ```{SQL}
-select * 
-from public_matches 
-where avg_mmr > 5000 and 
-    lobby_type = 7 and 
-    game_mode = 22 and 
+select *
+from public_matches
+where avg_mmr > 5000 and
+    lobby_type = 7 and
+    game_mode = 22 and
     start_time > 1535760000 and
     start_time < 1539280800
 ```
